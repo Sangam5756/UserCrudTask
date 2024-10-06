@@ -38,7 +38,7 @@ const CreateModal = ({ onClose, setUserById }) => {
           error?.company
       );
     }
-    if(error.length === undefined){
+    else{
       setUserById(formData);
       onClose();
     }

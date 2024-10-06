@@ -42,7 +42,7 @@ const EditModel = ({ user, onClose, setUserById }) => {
           error?.username ||
           error?.company
       );
-    }  if(error.length === undefined){
+    } else{
       setUserById(formData);
       onClose();
     }
