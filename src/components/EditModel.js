@@ -22,8 +22,7 @@ const EditModel = ({ user, onClose, setUserById }) => {
       } else {
         setFormData((prevUser) => ({ ...prevUser, [name]: value }));
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const handleSubmit = async (e) => {
@@ -32,22 +31,22 @@ const EditModel = ({ user, onClose, setUserById }) => {
       const error = validateForm(formData);
 
       if (error) {
-      toast.error(
-        error?.name ||
-          error?.phone ||
-          error?.website ||
-          error?.email ||
-          error?.street ||
-          error?.city ||
-          error?.username ||
-          error?.company
-      );
-    } else{
-      setUserById(formData);
-      onClose();
-    }
-    } catch (error) {
-    }
+        toast.error(
+          error?.name ||
+            error?.phone ||
+            error?.website ||
+            error?.email ||
+            error?.street ||
+            error?.city ||
+            error?.username ||
+            error?.company
+        );
+      }
+      if (Object.keys(error).length === 0) {
+        setUserById(formData);
+        onClose();
+      }
+    } catch (error) {}
   };
 
   return (

@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { validateForm } from "../helper/Validation";
 import { toast } from "react-toastify";
@@ -25,6 +24,7 @@ const CreateModal = ({ onClose, setUserById }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("clicked")
     const error = validateForm(formData);
     if (error) {
       toast.error(
@@ -38,14 +38,14 @@ const CreateModal = ({ onClose, setUserById }) => {
           error?.company
       );
     }
-    else{
+
+    
+    if (Object.keys(error).length === 0) {
       setUserById(formData);
       onClose();
     }
   };
 
-
-  
   return (
     <div className="fixed flex items-center w-full right-0 bottom-0 left-0 bg-slate-200 px-5 bg-opacity-50 top-0 mt-10 lg:mt-auto justify-center ">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
