@@ -54,6 +54,7 @@ const Home = () => {
       const updatedUsers = users?.map((u) =>
         u?.id === data?.data?.id ? data?.data : u
       );
+      console.log(updatedUser);
 
       setUsers(updatedUsers);
 
@@ -71,6 +72,7 @@ const Home = () => {
   };
 
   // new data
+  
   const handleNewUser = async (newUser) => {
     try {
       setLoading(true);
@@ -100,8 +102,7 @@ const Home = () => {
     try {
       setDeleteId(id);
       setDeleteModal(!deleteModal);
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const deleteUSerConfirmed = async () => {

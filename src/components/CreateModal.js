@@ -26,7 +26,7 @@ const CreateModal = ({ onClose, setUserById }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const error = validateForm(formData);
-    if (error.length > 0) {
+    if (error) {
       toast.error(
         error?.name ||
           error?.phone ||
@@ -37,7 +37,8 @@ const CreateModal = ({ onClose, setUserById }) => {
           error?.username ||
           error?.company
       );
-    } else {
+    }
+    if(error.length === undefined){
       setUserById(formData);
       onClose();
     }
