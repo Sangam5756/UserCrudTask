@@ -1,30 +1,30 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import EditModel from "../components/EditModel";
+import { useSelector } from "react-redux";
+import Shimmer from "../components/shimmer/Shimmer";
 
 const UserDetail = () => {
   const { id } = useParams();
 
+  const userR = useSelector((store) => store?.user?.user);
+
   const [user, setUsers] = useState([]);
-  const [openmodal, setOpenModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fetchUsers = async () => {
     try {
-      const data = await axios.get(
-        "https://jsonplaceholder.typicode.com/users/" + id
-      );
-      //   set the user data
-      setUsers(data?.data);
-      console.log(data.data);
-    } catch (error) {
-      console.log(error.message);
-    }
+      setLoading(true);
+      const data = userR.filter((user) => user?.id === Number(id));
+      setUsers(data[0]);
+      setLoading(false);
+    } catch (error) {}
   };
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [id]);
+
+  if (loading) return <Shimmer />;
 
   return (
     <div>
@@ -66,19 +66,13 @@ const UserDetail = () => {
                 <strong>Website:</strong> {user.website || "N/A"}
               </p>
             </div>
-            <button onClick={() => setOpenModal(!openmodal)}>Edit</button>
           </div>
         )}
       </div>
-      {openmodal && (
-        <EditModel
-          setUsers={setUsers}
-          onClose={() => setOpenModal(false)}
-          user={user}
-        />
-      )}
     </div>
   );
 };
+
+
 
 export default UserDetail;

@@ -9,9 +9,12 @@ const dataSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+    AddnewUser: (state, action) => {
+      state.user =action.payload;
+    },
   },
 });
 
-export const { setUser } = dataSlice.actions;
+export const { setUser, AddnewUser } = dataSlice.actions;
 
 export default dataSlice.reducer;
